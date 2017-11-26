@@ -1,0 +1,2 @@
+output: ./bin/basic
+build_pkg: ./cmd/

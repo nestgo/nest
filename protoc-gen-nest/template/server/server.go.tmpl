@@ -1,0 +1,21 @@
+package server
+
+import (
+	"context"
+
+	"../proto"
+	"google.golang.org/grpc"
+)
+
+var _ context.Context
+
+//{{CamelCase .Service.Name}}Server server struct
+type {{CamelCase .Service.Name}}Server struct {
+}
+
+//Register register service
+func ({{LowerFirst .Service.Name}} *{{CamelCase .Service.Name}}Server) Register(s *grpc.Server) {
+	proto.Register{{CamelCase .Service.Name}}Server(s, {{LowerFirst .Service.Name}})
+}
+
+{{.ServerMethodsTpl}}

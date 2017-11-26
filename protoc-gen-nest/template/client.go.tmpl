@@ -1,0 +1,40 @@
+package {{.PackageName}}
+
+import (
+	"context"
+	"fmt"
+
+	"./proto"
+
+	"google.golang.org/grpc"
+)
+
+var _ context.Context
+
+//{{CamelCase .Service.Name}}Client client
+type {{CamelCase .Service.Name}}Client struct {
+	conn   *grpc.ClientConn
+	client proto.{{CamelCase .Service.Name}}Client
+}
+
+//Init init connection
+func ({{LowerFirst .Service.Name}}Client *{{CamelCase .Service.Name}}Client) Init(address string) error {
+	// Set up a connection to the server.
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	if err != nil {
+		return fmt.Errorf("did not connect: %v", err)
+	}
+	{{LowerFirst .Service.Name}}Client.conn = conn
+	{{LowerFirst .Service.Name}}Client.client = proto.New{{CamelCase .Service.Name}}Client(conn)
+	return err
+}
+
+//Close close connection
+func ({{LowerFirst .Service.Name}}Client *{{CamelCase .Service.Name}}Client) Close() error {
+	if {{LowerFirst .Service.Name}}Client != nil {
+		return {{LowerFirst .Service.Name}}Client.conn.Close()
+	}
+	return nil
+}
+
+{{.ClientMethodsTpl}}
