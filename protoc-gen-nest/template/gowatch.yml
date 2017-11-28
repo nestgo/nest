@@ -1,2 +1,2 @@
-output: ./bin/basic
-build_pkg: ./cmd/
+output: './bin/{{.PackageName}}'
+build_pkg: ./cmd/main.go

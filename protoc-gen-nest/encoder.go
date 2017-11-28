@@ -138,6 +138,7 @@ func (e *GenericTemplateBasedEncoder) Files() []*plugin_go.CodeGeneratorResponse
 					panic(err)
 				}
 				copyTmplFile = strings.TrimSuffix(copyTmplFile, ".tmpl")
+				copyTmplFile = fmt.Sprintf("%s/%s", e.destinationDir, copyTmplFile)
 				files = append(files, &plugin_go.CodeGeneratorResponse_File{
 					Content: &content,
 					Name:    &copyTmplFile,
@@ -150,6 +151,7 @@ func (e *GenericTemplateBasedEncoder) Files() []*plugin_go.CodeGeneratorResponse
 			}
 			copyTmplFile := tmplFile
 			copyTmplFile = strings.TrimSuffix(copyTmplFile, ".tmpl")
+			copyTmplFile = fmt.Sprintf("%s/%s", e.destinationDir, copyTmplFile)
 			files = append(files, &plugin_go.CodeGeneratorResponse_File{
 				Content: &content,
 				Name:    &copyTmplFile,
