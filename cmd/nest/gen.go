@@ -49,7 +49,7 @@ func gen(cmd *cobra.Command, args []string) {
 			panic(fmt.Sprintf("mkdir %s failed,err=%v", absOutputDir, err))
 		}
 	}
-	s, _ := ioutil.ReadDir("path")
+	s, _ := ioutil.ReadDir(absOutputDir)
 	if len(s) != 0 {
 		panic(fmt.Sprintf("%s is not empty.", absOutputDir))
 	}
